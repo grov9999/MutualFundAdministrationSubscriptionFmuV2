@@ -1,7 +1,7 @@
 BROKER SCHEMA ace.bus.api.postDepositExecute 
 PATH ace.bus.api.postDepositExecute, pe.ibk.common;
 
-CREATE PROCEDURE prepareDataRequestCICS(IN refOut REFERENCE, IN refEnv REFERENCE, IN refParameters REFERENCE, IN refBodyIn REFERENCE,IN refQueryString REFERENCE)
+CREATE PROCEDURE prepareDataRequestCICS(IN refOut REFERENCE, IN refEnv REFERENCE, IN refParameters REFERENCE, IN refBodyIn REFERENCE)
 BEGIN
 
 	DECLARE refBody		REFERENCE TO refOut;
@@ -15,7 +15,7 @@ BEGIN
 		CREATE FIELD refOut.{C_MESSAGE_TYPE} AS refOut;
 	END IF;
 	/* Configurar la data del mensaje */
-	CALL prepareDataCICS( refOut, refQueryString, refBodyIn );
+	CALL prepareDataCICS(refEnv,refOut,refBodyIn,refParameters);
 
 END;
 

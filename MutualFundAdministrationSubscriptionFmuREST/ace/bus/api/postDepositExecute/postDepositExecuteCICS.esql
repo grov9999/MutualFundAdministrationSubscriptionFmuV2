@@ -24,6 +24,7 @@ CREATE COMPUTE MODULE postDepositExecuteCICS_PrepareReq
 		DECLARE refBodyOut REFERENCE TO OutputRoot.DFDL;
 		
  		--CALL prepareDataRequestCICS(refBodyOut,refEnv,refParametersIn,refBody);
+ 		CALL prepareDataRequestCICS(refBodyOut,refEnv,refParametersIn,refBody);
 		CALL setConfigPropertiesCICS( OutputLocalEnvironment, refEnv);	
 		
 		/** Audit request data **/
