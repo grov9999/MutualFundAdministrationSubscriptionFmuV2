@@ -19,15 +19,21 @@ BEGIN
 
 END;
 
-CREATE PROCEDURE prepareDataCICS(IN refOut REFERENCE,IN refQueryString REFERENCE, IN refIn REFERENCE)
+CREATE PROCEDURE prepareDataCICS(IN refEnv REFERENCE,IN refOut REFERENCE,IN refBody REFERENCE, IN refParameters REFERENCE)
 BEGIN
-
-    SET refOut.BSEC710P_COUNI = FormatAlignCadena(refIn.uniqueCode, 10, ' ', 'IZQ');
-    SET refOut.BSEC710P_NUM_CTFM = FormatAlignCadena(refIn.contractNumberMutualFund, 7, ' ', 'IZQ');
-    SET refOut.BSEC710P_COFON = FormatAlignCadena(refIn.investmentFundType, 2, ' ', 'IZQ');
-    SET refOut.BSEC710P_DEPRV = FormatAlignCadena(refIn.vendorCode, 8, ' ', 'IZQ');
-    SET refOut.BSEC710P_IND_ITF = FormatAlignCadena(refIn.ITFFlag, 1, ' ', 'IZQ');
-    SET refOut.BSEC710P_FILLER_INPUT = FormatAlignCadena(' ', 107, ' ', 'IZQ');
+	
+	CREATE FIELD refOut.BSEC710P_BSECXCOM;
+	CREATE FIELD refOut.BSEC710P_DATOS_INPUT;
+	
+	SET refOut.BSEC710P_BSECXCOM = prepararRequestTxCommonDataBse(refBody.bseInformation);
+	
+	DECLARE refBodyOut REFERENCE TO refOut.BSEC710P_DATOS_INPUT;
+    SET refBodyOut.BSEC710P_COUNI = FormatAlignCadena(refBody.uniqueCode, 10, ' ', 'IZQ');
+    SET refBodyOut.BSEC710P_NUM_CTFM = FormatAlignCadena(refBody.contractNumberMutualFund, 7, ' ', 'IZQ');
+    SET refBodyOut.BSEC710P_COFON = FormatAlignCadena(refBody.investmentFundType, 2, ' ', 'IZQ');
+    SET refBodyOut.BSEC710P_DEPRV = FormatAlignCadena(refBody.vendorCode, 8, ' ', 'IZQ');
+    SET refBodyOut.BSEC710P_IND_ITF = FormatAlignCadena(refBody.ITFFlag, 1, ' ', 'IZQ');
+    SET refBodyOut.BSEC710P_FILLER_INPUT = FormatAlignCadena(' ', 107, ' ', 'IZQ');
 
 END;
 
