@@ -45,22 +45,39 @@ BEGIN
     DECLARE refOutData REFERENCE TO refOut.JSON.Data;
 
 
+--    SET refOutData.operationNumber = 'string';
+--    SET refOutData.operationDate = 'string';
+--    SET refOutData.requestNumber = 'string';
+--    SET refOutData.signCommission = 'string';
+--    SET refOutData.commision = 'string';
+--    SET refOutData.signCommissionIGV = 'string';
+--    SET refOutData.commisionIGV = 'string';
+--    SET refOutData.account = 'string';
+--    SET refOutData.placeNumber = 'string';
+--    SET refOutData.description = 'string';
+--    SET refOutData.description1 = 'string';
+--    SET refOutData.description2 = 'string';
+--    SET refOutData.administrativeTaxCommission = 'string';
+--    SET refOutData.rescueTaxCommission = 'string';
+--    SET refOutData.productDescription = 'string';
+--    SET refOutData.documentDescription = 'string';
+    
     SET refOutData.operationNumber = 'string';
     SET refOutData.operationDate = 'string';
-    SET refOutData.requestNumber = 'string';
-    SET refOutData.signCommission = 'string';
-    SET refOutData.commision = 'string';
-    SET refOutData.signCommissionIGV = 'string';
-    SET refOutData.commisionIGV = 'string';
-    SET refOutData.account = 'string';
-    SET refOutData.placeNumber = 'string';
-    SET refOutData.description = 'string';
-    SET refOutData.description1 = 'string';
-    SET refOutData.description2 = 'string';
-    SET refOutData.administrativeTaxCommission = 'string';
-    SET refOutData.rescueTaxCommission = 'string';
-    SET refOutData.productDescription = 'string';
-    SET refOutData.documentDescription = 'string';
+    SET refOutData.requestNumber = refEnv.MOCK.BSEC710P_NUSLC;
+    SET refOutData.signCommission = refEnv.MOCK.BSEC710P_IMCOM_S;
+    SET refOutData.commision = refEnv.MOCK.BSEC710P_IMCOM;
+    SET refOutData.signCommissionIGV = refEnv.MOCK.BSEC710P_IMIGV_S;
+    SET refOutData.commisionIGV = refEnv.MOCK.BSEC710P_IMIGV;
+    SET refOutData.account = refEnv.MOCK.BSEC710P_NUCTA;
+    SET refOutData.placeNumber = refEnv.MOCK.BSEC710P_NUPLZ;
+    SET refOutData.description = refEnv.MOCK.BSEC710P_DEMENRF;
+    SET refOutData.description1 = refEnv.MOCK.BSEC710P_DEMENRF1;
+    SET refOutData.description2 = refEnv.MOCK.BSEC710P_DEMENRF2;
+    SET refOutData.administrativeTaxCommission = refEnv.MOCK.BSEC710P_IMCOMADM;
+    SET refOutData.rescueTaxCommission = refEnv.MOCK.BSEC710P_IMCOMRES;
+    SET refOutData.productDescription = refEnv.MOCK.BSEC710P_NUSLC;
+    SET refOutData.documentDescription = refEnv.MOCK.BSEC710P_DEPRD;
 
 END;
 
