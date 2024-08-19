@@ -107,3 +107,16 @@ CREATE COMPUTE MODULE postDepositExecuteCICS_PrepareError
 		RETURN TRUE;		
 	END;
 END MODULE;
+
+
+
+
+
+CREATE COMPUTE MODULE postDepositExecuteCICS_Local_MockResponse
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+
+						
+		RETURN TRUE;
+	END;
+END MODULE;
