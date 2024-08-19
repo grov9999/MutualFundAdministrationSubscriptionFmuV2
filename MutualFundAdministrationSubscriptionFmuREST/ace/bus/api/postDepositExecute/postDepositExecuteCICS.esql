@@ -30,8 +30,11 @@ CREATE COMPUTE MODULE postDepositExecuteCICS_PrepareReq
 		/** Audit request data **/
 		CALL setMonitoringRequestTime( refEnv );
 		CALL getRequestDataAudit( refEnv,  OutputRoot, OutputLocalEnvironment );
+		
+		SET Environment.ZEROXG.DataCICS = CAST( ASBITSTREAM(OutputRoot.DFDL CCSID getCCSID_HOST() ENCODING getENCODING_HOST()) AS CHARACTER CCSID getCCSID_HOST() ENCODING getENCODING_HOST());---Sirva para ver la trama , guardar en txt
+		PROPAGATE TO LABEL 'localFlow';
 						
-		RETURN TRUE;
+		RETURN FALSE;
 	END;
 END MODULE;
 
