@@ -28,7 +28,7 @@ BEGIN
 	SET refOut.BSEC710P_BSECXCOM = prepararRequestTxCommonDataBse(refBody.bseInformation);
 	
 	DECLARE refBodyOut REFERENCE TO refOut.BSEC710P_DATOS_INPUT;
-    SET refBodyOut.BSEC710P_COUNI = FormatAlignCadena(refBody.uniqueCode, 10, ' ', 'IZQ');
+    SET refBodyOut.BSEC710P_COUNI = FormatAlignCadena(refBody.uniqueCode, 10, '0', 'DER');
     SET refBodyOut.BSEC710P_NUM_CTFM = FormatAlignCadena(refBody.contractNumberMutualFund, 7, ' ', 'IZQ');
     SET refBodyOut.BSEC710P_COFON = FormatAlignCadena(refBody.investmentFundType, 2, ' ', 'IZQ');
     SET refBodyOut.BSEC710P_DEPRV = FormatAlignCadena(refBody.vendorCode, 8, ' ', 'IZQ');
