@@ -51,17 +51,16 @@ CREATE COMPUTE MODULE postDepositExecuteCICS_PrepareRes
 		SET Environment.data.chrTramaOut = chrTramaOut;
 		
 		DECLARE chrCodRes CHARACTER SUBSTRING(chrTramaOut FROM C_IND_COD_RESP FOR C_LNG_COD_RESP);
-		 
 		DECLARE chrCodMsg CHARACTER SUBSTRING(chrTramaOut FROM C_IND_MSG_RESP FOR C_LNG_MSG_RESP);
-		SET Environment.datoIn = C_IND_COD_RESP;
-		SET Environment.datoFin = C_IND_MSG_RESP;
+		--SET Environment.datoIn = C_IND_COD_RESP;
+		--SET Environment.datoFin = C_IND_MSG_RESP;
 		
 		
 		--DECLARE chrCodRes CHARACTER SUBSTRING(chrTramaOut FROM 252 FOR 255);
-		SET Environment.datoChr = chrCodRes;
+		--SET Environment.datoChr = chrCodRes;
 		
 		SET chrCodRes = RIGHT('0000' || TRIM(chrCodRes),4);
-		SET Environment.datoTrim = chrCodRes;
+		--SET Environment.datoTrim = chrCodRes;
 		
 		CALL createResponseStatus(Environment,NULL,0,'EJECUCION CON EXITO',chrCodRes,chrCodMsg);
 		
@@ -69,7 +68,6 @@ CREATE COMPUTE MODULE postDepositExecuteCICS_PrepareRes
 		DECLARE responseType INTEGER COALESCE(Environment.StatusRes.status.responseType, -1);
 		
 		IF chrCodRes = '0000' OR responseType = 0 THEN
-			SET Environment.PRUEBA = 'SSSSSSAAAAAAA';
 			CALL createHeaderBus(OutputRoot,Environment);
 			CALL parsingTramaCICS(InputRoot,Environment,C_NS);
 			CALL prepareResponseJSON(OutputRoot,Environment);
@@ -134,6 +132,9 @@ CREATE COMPUTE MODULE postDepositExecuteCICS_Local_MockResponse
 		DECLARE refEnvAudit REFERENCE TO refEnv.Audit;
 
 		DECLARE refMessageIn REFERENCE TO refInput.{C_NS}:MESSAGEHOST;
+		CREATE FIELD refMessageIn.HEADER_TLDCPAGO.TLDCPAGO_DATOS_INPUT;
+		CREATE FIELD refMessageIn.HEADER_TLDCPAGO.TLDCPAGO_COMMAREA_MPIS;
+		CREATE FIELD refMessageIn.HEADER_TLDCPAGO.TLDCPAGO_DATOS_OUTPUT;
 
 		CREATE FIELD refMessageIn.BODY.BSEC710P_DATOS_OUTPUT;
 		DECLARE refDfdlBody REFERENCE TO refMessageIn.BODY.BSEC710P_DATOS_OUTPUT;
