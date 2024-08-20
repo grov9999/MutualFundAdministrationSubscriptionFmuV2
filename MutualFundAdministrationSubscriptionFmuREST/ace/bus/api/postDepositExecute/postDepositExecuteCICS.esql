@@ -52,22 +52,15 @@ CREATE COMPUTE MODULE postDepositExecuteCICS_PrepareRes
 		
 		DECLARE chrCodRes CHARACTER SUBSTRING(chrTramaOut FROM C_IND_COD_RESP FOR C_LNG_COD_RESP);
 		DECLARE chrCodMsg CHARACTER SUBSTRING(chrTramaOut FROM C_IND_MSG_RESP FOR C_LNG_MSG_RESP);
-		--SET Environment.datoIn = C_IND_COD_RESP;
-		--SET Environment.datoFin = C_IND_MSG_RESP;
-		
-		
-		--DECLARE chrCodRes CHARACTER SUBSTRING(chrTramaOut FROM 252 FOR 255);
-		--SET Environment.datoChr = chrCodRes;
-		
-		SET chrCodRes = RIGHT('0000' || TRIM(chrCodRes),4);
-		--SET Environment.datoTrim = chrCodRes;
-		
+
+		SET chrCodRes = RIGHT(C_CICS_OK_RESP || TRIM(chrCodRes),4);
+
 		CALL createResponseStatus(Environment,NULL,0,'EJECUCION CON EXITO',chrCodRes,chrCodMsg);
 		
 		CALL isSuccessCategoryCICS(Environment.StatusRes,Environment,Environment.Equivalencias);
 		DECLARE responseType INTEGER COALESCE(Environment.StatusRes.status.responseType, -1);
 		
-		IF chrCodRes = '0000' OR responseType = 0 THEN
+		IF chrCodRes = C_CICS_OK_RESP OR responseType = 0 THEN
 			CALL createHeaderBus(OutputRoot,Environment);
 			CALL parsingTramaCICS(InputRoot,Environment,C_NS);
 			CALL prepareResponseJSON(OutputRoot,Environment);
